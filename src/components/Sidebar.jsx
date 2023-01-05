@@ -1,4 +1,4 @@
-import { LineStyle, Timeline, TrendingUp } from '@mui/icons-material';
+import { AttachMoney, BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, Storefront, Timeline, TrendingUp, WorkOutline } from '@mui/icons-material';
 import React from 'react'
 import styled from 'styled-components'
 
@@ -40,15 +40,15 @@ const SidebarListItem = styled.li`
     }    
 `;
 
-const SidebarIcon = styled.div.attrs(props => ({
-    className: props.className,
-}))`
-&.SideBarIcon{
-        font-size: 20px !important;
-        margin-right: 5px;
-    }
+const SidebarIcon = styled.div`
+
 `;
 
+//styling material ui icons
+const MaterialUiStyles = {
+    marginRight: "5px",
+    fontSize: "20px"
+}
 
 const Sidebar = () => {
     return (
@@ -59,21 +59,90 @@ const Sidebar = () => {
                     <SidebarList>
                         <SidebarListItem>
                             <SidebarIcon>
-                                <LineStyle sx={{fontSize: "20px",marginRight: "5px",}}/>
+                                <LineStyle sx={MaterialUiStyles} />
                             </SidebarIcon>
                             Home
                         </SidebarListItem>
                         <SidebarListItem>
                             <SidebarIcon>
-                                <Timeline />
+                                <Timeline sx={MaterialUiStyles} />
                             </SidebarIcon>
                             Analytics
                         </SidebarListItem>
                         <SidebarListItem>
                             <SidebarIcon>
-                                <TrendingUp />
+                                <TrendingUp sx={MaterialUiStyles} />
                             </SidebarIcon>
                             Sales
+                        </SidebarListItem>
+                    </SidebarList>
+                    <SidebarTitle>Quick Menu</SidebarTitle>
+                    <SidebarList>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <PermIdentity sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Users
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <Storefront sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Products
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <AttachMoney sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Transactions
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <BarChart sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Reports
+                        </SidebarListItem>
+                    </SidebarList>
+                    <SidebarTitle>Notifications</SidebarTitle>
+                    <SidebarList>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <MailOutline sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Mail
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <DynamicFeed sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Feedback
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <ChatBubbleOutline sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Messages
+                        </SidebarListItem>
+                    </SidebarList>
+                    <SidebarTitle>Staff</SidebarTitle>
+                    <SidebarList>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <WorkOutline sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Manage
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <Timeline sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Analytics
+                        </SidebarListItem>
+                        <SidebarListItem>
+                            <SidebarIcon>
+                                <Report sx={MaterialUiStyles} />
+                            </SidebarIcon>
+                            Reports
                         </SidebarListItem>
                     </SidebarList>
                 </SidebarMenu>
