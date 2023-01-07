@@ -1,5 +1,6 @@
 import { AttachMoney, BarChart, ChatBubbleOutline, DynamicFeed, LineStyle, MailOutline, PermIdentity, Report, Storefront, Timeline, TrendingUp, WorkOutline } from '@mui/icons-material';
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 const SideBar = styled.div`
@@ -57,12 +58,14 @@ const Sidebar = () => {
                 <SidebarMenu>
                     <SidebarTitle>Dashboard</SidebarTitle>
                     <SidebarList>
-                        <SidebarListItem>
-                            <SidebarIcon>
-                                <LineStyle sx={MaterialUiStyles} />
-                            </SidebarIcon>
-                            Home
-                        </SidebarListItem>
+                        <Link to="/" className='link'>
+                            <SidebarListItem>
+                                <SidebarIcon>
+                                    <LineStyle sx={MaterialUiStyles} />
+                                </SidebarIcon>
+                                Home
+                            </SidebarListItem>
+                        </Link>
                         <SidebarListItem>
                             <SidebarIcon>
                                 <Timeline sx={MaterialUiStyles} />
@@ -78,18 +81,22 @@ const Sidebar = () => {
                     </SidebarList>
                     <SidebarTitle>Quick Menu</SidebarTitle>
                     <SidebarList>
-                        <SidebarListItem>
-                            <SidebarIcon>
-                                <PermIdentity sx={MaterialUiStyles} />
-                            </SidebarIcon>
-                            Users
-                        </SidebarListItem>
-                        <SidebarListItem>
-                            <SidebarIcon>
-                                <Storefront sx={MaterialUiStyles} />
-                            </SidebarIcon>
-                            Products
-                        </SidebarListItem>
+                        <Link to="/users" className='link'>
+                            <SidebarListItem>
+                                <SidebarIcon>
+                                    <PermIdentity sx={MaterialUiStyles} />
+                                </SidebarIcon>
+                                Users
+                            </SidebarListItem>
+                        </Link>
+                        <Link to="/products" className='link'>
+                            <SidebarListItem>
+                                <SidebarIcon>
+                                    <Storefront sx={MaterialUiStyles} />
+                                </SidebarIcon>
+                                Products
+                            </SidebarListItem>
+                        </Link>
                         <SidebarListItem>
                             <SidebarIcon>
                                 <AttachMoney sx={MaterialUiStyles} />

@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const NewUserContainer = styled.div`
     flex: 4;
-    margin-left: 10px;
+    padding: 20px;
 `;
 
 const NewUserTitle = styled.h1``;
@@ -36,12 +36,34 @@ const NewUserInput = styled.input`
 
 const NewUserGender = styled.div``;
 
-const NewUserLabelDiff = styled.label``;
-const NewUserInputDiff = styled.input``;
+const NewUserLabelDiff = styled.label`
+    margin: 10px;
+    font-size: 18px;
+    color: #555;
+`;
 
-const NewUserSelect = styled.select``;
+const NewUserInputDiff = styled.input`
+    margin-top: 15px;
+`;
+
+const NewUserSelect = styled.select`
+    height: 40px;
+    border-radius: 5px;
+`;
 
 const NewUserOption = styled.option``;
+
+const NewUserButton = styled.button`
+    background-color: darkblue;
+    color: white;
+    width: 200px;
+    border: none;
+    cursor: pointer;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+`;
 
 const NewUser = () => {
     return (
@@ -91,6 +113,7 @@ const NewUser = () => {
                     </NewUserSelect>
                 </NewUserItem>
             </NewUserForm>
+            <NewUserButton>Create</NewUserButton>
         </NewUserContainer>
     )
 }

@@ -49,6 +49,21 @@ export const userData = [
     },
   ];
 
+  export const productData = [
+    {
+      name: 'Jan',
+      "Sales": 4000,
+    },
+    {
+      name: 'Feb',
+      "Sales": 8000,
+    },
+    {
+      name: 'Mar',
+      "Sales": 3000,
+    },
+  ];
+
   export const userRows = [
     {
         id: 1, 
@@ -129,5 +144,88 @@ export const userData = [
         email: "jon@gmail.com",
         status: "active",
         transaction: "$120 "
+    },
+  ];
+
+  export const productRows = [
+    {
+        id: 1, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 2, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 3, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 4, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 5, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 6, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 7, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 8, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 9, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
+    },
+    {
+        id: 10, 
+        name: 'Apple Airpods',
+        img: "https://images.pexels.com/photos/5099868/pexels-photo-5099868.jpeg?auto=compress&cs=tinysrgb&w=800",
+        stock: 123,
+        status: "active",
+        price: "$120 "
     },
   ];

@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from "@mui/icons-material";
-import { userRows } from "../dummyData";
+import { productRows } from "../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const UserListContainer = styled.div`
+const ProductListContainer = styled.div`
     flex: 4;
     padding: 20px;
 `;
@@ -13,44 +13,47 @@ const UserListContainer = styled.div`
 const DeleteOutlineStyle = {
     color: "red",
     cursor: "pointer"
-}
+};
 
-const UserList = () => {
 
-    const [data, setData] = useState(userRows)
+const ProductList = () => {
+
+    const [data, setData] = useState(productRows)
+    
     const handleClick = (id) =>{
         setData(data.filter((item) =>item.id !== id))
     }
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         {
-            field: 'user', headerName: 'User', width: 200, renderCell: (params) => {
+            field: 'product', headerName: 'Product', width: 200, renderCell: (params) => {
                 return (
                     <div style={{
                         display: "flex",
                         alignItems: "center",
                     }}>
-                        <img src={params.row.avatar} alt="" style={{
+                        <img src={params.row.img} alt="" style={{
                             width: "32px",
                             height: "32px",
                             borderRadius: "50%",
                             objectFit: "cover",
                             marginRight: "10px"
                         }} />
-                        {params.row.username}
+                        {params.row.name}
                     </div>
                 )
             }
         },
-        { field: 'email', headerName: 'Email', width: 200 },
+        { field: 'stock', headerName: 'Stock', width: 200 },
         {
             field: 'status',
             headerName: 'Status',
             width: 120,
         },
         {
-            field: 'transaction',
-            headerName: 'Transaction',
+            field: 'price',
+            headerName: 'Price',
             width: 160,
         },
         {
@@ -60,7 +63,7 @@ const UserList = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/user/" + params.row.id}>
+                        <Link to={"/product/" + params.row.id}>
                             <button style={{
                                 border: "none",
                                 borderRadius: "10px",
@@ -78,22 +81,20 @@ const UserList = () => {
         }
     ];
 
-
-
-    return (
-        <UserListContainer>
-            <div style={{ height: 527, width: '100%' }}>
-                <DataGrid
-                    rows={data}
-                    columns={columns}
-                    pageSize={8}
-                    rowsPerPageOptions={[8]}
-                    checkboxSelection
-                    disableSelectionOnClick
-                />
-            </div>
-        </UserListContainer>
-    )
+  return (
+    <ProductListContainer>
+        <div style={{ height: 527, width: '100%' }}>
+            <DataGrid
+                rows={data}
+                columns={columns}
+                pageSize={8}
+                rowsPerPageOptions={[8]}
+                checkboxSelection
+                disableSelectionOnClick
+            />
+        </div>
+    </ProductListContainer>
+  )
 }
 
-export default UserList
+export default ProductList

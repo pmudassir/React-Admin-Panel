@@ -7,6 +7,7 @@ import { userData } from "../dummyData";
 
 const HomeContainer = styled.div`
     flex: 4;
+    padding: 20px;
 `;
 
 const HomeWidgets = styled.div`
