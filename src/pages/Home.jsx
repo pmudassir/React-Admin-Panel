@@ -18,12 +18,12 @@ const HomeWidgets = styled.div`
 const Home = () => {
   return (
     <HomeContainer>
-        <FeaturedInfo/>
-        <Chart data={userData} title="User Analytics" grid dataKey="Active Users"/>
-        <HomeWidgets>
-            <WidgetSmall/>
-            <WidgetLarge/>
-        </HomeWidgets>
+      <FeaturedInfo />
+      <Chart data={userData} title="User Analytics" grid dataKey="Active Users" />
+      <HomeWidgets>
+        <WidgetSmall />
+        <WidgetLarge />
+      </HomeWidgets>
     </HomeContainer>
   )
 }
