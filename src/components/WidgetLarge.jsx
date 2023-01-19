@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components"
+import { userRequest } from "../requestMethods";
 import "./WidgetLarge.css"
+import { format } from 'timeago.js'
 
 const WidgetLargeContainer = styled.div`
     flex: 2;
@@ -30,17 +33,7 @@ const WidgetLargeTd = styled.td`
     font-weight: 600;
 `;
 
-const WidgetLargeImage = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-`;
-
-const WidgetLargeName = styled.span`
-    
-`;
+const WidgetLargeName = styled.span``;
 
 const WidgetLargeDate = styled.td`
     font-weight: 300;
@@ -53,68 +46,48 @@ const WidgetLargeAmount = styled.td`
 const WidgetLargeStatus = styled.td``;
 
 const WidgetLarge = () => {
+    const [orders, setOrders] = useState([])
 
-    const Button = ({type}) =>{
-        return  <button className={"WidgetButton " + type}> {type} </button>
+    useEffect(() => {
+        const getOrders = async () => {
+            try {
+                const res = await userRequest.get("users/?new=true")
+                setOrders(res.data)
+            } catch (error) { }
+        }
+        getOrders()
+    }, [])
+
+    const Button = ({ type }) => {
+        return <button className={"WidgetButton " + type}> {type} </button>
     }
 
-  return (
-    <WidgetLargeContainer>
-        <WidgetLargeTitle>Latest Transactions</WidgetLargeTitle>
-        <WidgetLargeTable>
-            <WidgetLargeTr>
-                <WidgetLargeTh>Customer</WidgetLargeTh>
-                <WidgetLargeTh>Date</WidgetLargeTh>
-                <WidgetLargeTh>Amount</WidgetLargeTh>
-                <WidgetLargeTh>Status</WidgetLargeTh>
-            </WidgetLargeTr>
-            <WidgetLargeTr>
-                <WidgetLargeTd>
-                    <WidgetLargeImage src="https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
-                    <WidgetLargeName>Susan Carole</WidgetLargeName>
-                </WidgetLargeTd>
-                <WidgetLargeDate>6 Jan 2023</WidgetLargeDate>
-                <WidgetLargeAmount>$122</WidgetLargeAmount>
-                <WidgetLargeStatus>
-                    <Button type="Approved"/>
-                </WidgetLargeStatus>
-            </WidgetLargeTr>
-            <WidgetLargeTr>
-                <WidgetLargeTd>
-                    <WidgetLargeImage src="https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
-                    <WidgetLargeName>Susan Carole</WidgetLargeName>
-                </WidgetLargeTd>
-                <WidgetLargeDate>6 Jan 2023</WidgetLargeDate>
-                <WidgetLargeAmount>$122</WidgetLargeAmount>
-                <WidgetLargeStatus>
-                    <Button type="Declined"/>
-                </WidgetLargeStatus>
-            </WidgetLargeTr>
-            <WidgetLargeTr>
-                <WidgetLargeTd>
-                    <WidgetLargeImage src="https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
-                    <WidgetLargeName>Susan Carole</WidgetLargeName>
-                </WidgetLargeTd>
-                <WidgetLargeDate>6 Jan 2023</WidgetLargeDate>
-                <WidgetLargeAmount>$122</WidgetLargeAmount>
-                <WidgetLargeStatus>
-                    <Button type="Pending"/>
-                </WidgetLargeStatus>
-            </WidgetLargeTr>
-            <WidgetLargeTr>
-                <WidgetLargeTd>
-                    <WidgetLargeImage src="https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
-                    <WidgetLargeName>Susan Carole</WidgetLargeName>
-                </WidgetLargeTd>
-                <WidgetLargeDate>6 Jan 2023</WidgetLargeDate>
-                <WidgetLargeAmount>$122</WidgetLargeAmount>
-                <WidgetLargeStatus>
-                    <Button type="Approved"/>
-                </WidgetLargeStatus>
-            </WidgetLargeTr>
-        </WidgetLargeTable>
-    </WidgetLargeContainer>
-  )
+    return (
+        <WidgetLargeContainer>
+            <WidgetLargeTitle>Latest Transactions</WidgetLargeTitle>
+            <WidgetLargeTable>
+                <WidgetLargeTr>
+                    <WidgetLargeTh>Customer</WidgetLargeTh>
+                    <WidgetLargeTh>Date</WidgetLargeTh>
+                    <WidgetLargeTh>Amount</WidgetLargeTh>
+                    <WidgetLargeTh>Status</WidgetLargeTh>
+                </WidgetLargeTr>
+                {orders.map((order) => (
+                    <WidgetLargeTr>
+                        <WidgetLargeTd>
+                            <WidgetLargeName>{order.userId}</WidgetLargeName>
+                        </WidgetLargeTd>
+                        <WidgetLargeDate>{format(order.createdAt)}</WidgetLargeDate>
+                        {/* makes the time more readable using this format from timeago.js library */}
+                        <WidgetLargeAmount>$ {order.amount}</WidgetLargeAmount>
+                        <WidgetLargeStatus>
+                            <Button type={order.status} />
+                        </WidgetLargeStatus>
+                    </WidgetLargeTr>
+                ))}
+            </WidgetLargeTable>
+        </WidgetLargeContainer>
+    )
 }
 
 export default WidgetLarge

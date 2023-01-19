@@ -5,9 +5,13 @@ import { PageRoutes } from "./PageRoutes";
 
 
 function App() {
+  const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
   return (
     <Routes>
-      <Route path="/*" element={<PageRoutes />} />
+      {admin &&(
+        <>
+          <Route path="/*" element={<PageRoutes />} />
+        </>)}
       <Route path="/login" element={<Login />} />
     </Routes>
   );

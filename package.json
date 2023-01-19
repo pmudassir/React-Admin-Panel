@@ -23,6 +23,7 @@
     "rsuite": "^5.24.0",
     "styled-component": "^2.8.0",
     "styled-components": "^5.3.6",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

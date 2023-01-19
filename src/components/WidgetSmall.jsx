@@ -1,5 +1,7 @@
 import { Visibility } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
+import { userRequest } from "../requestMethods";
 
 const WidgetSmallContainer = styled.div`
     flex: 1;
@@ -43,10 +45,6 @@ const WidgetSmallUserName = styled.span`
     font-weight: 600;
 `;
 
-const WidgetSmallUserTitle = styled.span`
-    font-weight: 300;
-`;
-
 const WidgetSmallButton = styled.button`
     display: flex;
     align-items: center;
@@ -64,65 +62,33 @@ const WidgetSmallIcon = {
 }
 
 const WidgetSmall = () => {
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const res = await userRequest.get("users/?new=true")
+                setUsers(res.data)
+            } catch (error) { }
+        }
+        getUsers()
+    }, [])
     return (
         <WidgetSmallContainer>
             <WidgetSmallTitle>New Join Members</WidgetSmallTitle>
             <WidgetSmallList>
-                <WidgetSmallListItems>
-                    <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                    <WidgetSmallUser>
-                        <WidgetSmallUserName>Anna Keller</WidgetSmallUserName>
-                        <WidgetSmallUserTitle>Software Engineer</WidgetSmallUserTitle>
-                    </WidgetSmallUser>
-                    <WidgetSmallButton>
-                        <Visibility sx={WidgetSmallIcon} />
-                        Display
-                    </WidgetSmallButton>
-                </WidgetSmallListItems>
-                <WidgetSmallListItems>
-                    <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                    <WidgetSmallUser>
-                        <WidgetSmallUserName>Anna Keller</WidgetSmallUserName>
-                        <WidgetSmallUserTitle>Software Engineer</WidgetSmallUserTitle>
-                    </WidgetSmallUser>
-                    <WidgetSmallButton>
-                        <Visibility sx={WidgetSmallIcon} />
-                        Display
-                    </WidgetSmallButton>
-                </WidgetSmallListItems>
-                <WidgetSmallListItems>
-                    <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                    <WidgetSmallUser>
-                        <WidgetSmallUserName>Anna Keller</WidgetSmallUserName>
-                        <WidgetSmallUserTitle>Software Engineer</WidgetSmallUserTitle>
-                    </WidgetSmallUser>
-                    <WidgetSmallButton>
-                        <Visibility sx={WidgetSmallIcon} />
-                        Display
-                    </WidgetSmallButton>
-                </WidgetSmallListItems>
-                <WidgetSmallListItems>
-                    <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                    <WidgetSmallUser>
-                        <WidgetSmallUserName>Anna Keller</WidgetSmallUserName>
-                        <WidgetSmallUserTitle>Software Engineer</WidgetSmallUserTitle>
-                    </WidgetSmallUser>
-                    <WidgetSmallButton>
-                        <Visibility sx={WidgetSmallIcon} />
-                        Display
-                    </WidgetSmallButton>
-                </WidgetSmallListItems>
-                <WidgetSmallListItems>
-                    <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-                    <WidgetSmallUser>
-                        <WidgetSmallUserName>Anna Keller</WidgetSmallUserName>
-                        <WidgetSmallUserTitle>Software Engineer</WidgetSmallUserTitle>
-                    </WidgetSmallUser>
-                    <WidgetSmallButton>
-                        <Visibility sx={WidgetSmallIcon} />
-                        Display
-                    </WidgetSmallButton>
-                </WidgetSmallListItems>
+                {users && users.map((user) => (
+                    <WidgetSmallListItems key={user._id}>
+                        <Image src={user.img || "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-18.jpg"} />
+                        <WidgetSmallUser>
+                            <WidgetSmallUserName>{user.username}</WidgetSmallUserName>
+                        </WidgetSmallUser>
+                        <WidgetSmallButton>
+                            <Visibility sx={WidgetSmallIcon} />
+                            Display
+                        </WidgetSmallButton>
+                    </WidgetSmallListItems>
+                ))}
             </WidgetSmallList>
         </WidgetSmallContainer>
     )
