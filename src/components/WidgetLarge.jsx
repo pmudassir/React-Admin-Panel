@@ -72,7 +72,7 @@ const WidgetLarge = () => {
                     <WidgetLargeTh>Amount</WidgetLargeTh>
                     <WidgetLargeTh>Status</WidgetLargeTh>
                 </WidgetLargeTr>
-                {orders.map((order) => (
+                {orders && orders.map((order) => (
                     <WidgetLargeTr>
                         <WidgetLargeTd>
                             <WidgetLargeName>{order.userId}</WidgetLargeName>
