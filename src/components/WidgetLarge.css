@@ -4,17 +4,17 @@
     border-radius: 10px;
 }
 
-.WidgetButton.Approved{
+.WidgetButton.approved{
     background-color: #e5faf2;
     color: #3bb077;
 }
 
-.WidgetButton.Pending{
+.WidgetButton.pending{
     background-color: #ebf1fe;    
     color: #2a7ade; 
 }
 
-.WidgetButton.Declined{
+.WidgetButton.declined{
     background-color: #fff0f1;
     color: #d95087;
 }

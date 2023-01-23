@@ -1,5 +1,7 @@
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
+import { userRequest } from "../requestMethods";
 
 const Featured = styled.div`
     width: 100%;
@@ -56,14 +58,33 @@ const FeaturedSub = styled.span`
 `;
 
 const FeaturedInfo = () => {
+    const [income, setIncome] = useState([])
+    const [perc, setPerc] = useState(0)
+
+    useEffect(() => {
+        const getIncome = async () => {
+            try {
+                const res = await userRequest.get("orders/income")
+                setIncome(res.data)
+                setPerc((res.data[1].total * 100) / res.data[0].total - 100)
+            } catch (error) { }
+        };
+        getIncome()
+    }, [])
+    
     return (
         <Featured>
             <FeaturedItem>
                 <FeaturedTitle>Revenue</FeaturedTitle>
                 <FeaturedMoneyContainer>
-                    <FeaturedMoney>$2,415</FeaturedMoney>
+                    <FeaturedMoney>$ {income[1]?.total}</FeaturedMoney>
                     <FeaturedMoneyRate>
-                        -11.5 <ArrowDownward sx={ArrowDown}/>
+                        %{Math.floor(perc)}{" "}
+                        {perc >= 0 ? (
+                            <ArrowUpward sx={ArrowUp} />
+                        ) : (
+                            <ArrowDownward sx={ArrowDown} />
+                        )}
                     </FeaturedMoneyRate>
                 </FeaturedMoneyContainer>
                 <FeaturedSub>Compared to last Month</FeaturedSub>
@@ -73,7 +94,7 @@ const FeaturedInfo = () => {
                 <FeaturedMoneyContainer>
                     <FeaturedMoney>$4,415</FeaturedMoney>
                     <FeaturedMoneyRate>
-                        -1.5 <ArrowDownward sx={ArrowDown}/>
+                        -1.5 <ArrowDownward sx={ArrowDown} />
                     </FeaturedMoneyRate>
                 </FeaturedMoneyContainer>
                 <FeaturedSub>Compared to last Month</FeaturedSub>
@@ -83,7 +104,7 @@ const FeaturedInfo = () => {
                 <FeaturedMoneyContainer>
                     <FeaturedMoney>$2,22 5</FeaturedMoney>
                     <FeaturedMoneyRate>
-                        +2.5 <ArrowUpward sx={ArrowUp}/>
+                        +2.5 <ArrowUpward sx={ArrowUp} />
                     </FeaturedMoneyRate>
                 </FeaturedMoneyContainer>
                 <FeaturedSub>Compared to last Month</FeaturedSub>

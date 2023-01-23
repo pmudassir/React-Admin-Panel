@@ -1,8 +1,9 @@
 import { Publish } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components"
 import Chart from "../components/Chart";
 import { productData } from "../dummyData";
+import { useSelector } from "react-redux";
 
 const ProductContainer = styled.div`
     flex: 4;
@@ -142,6 +143,10 @@ const ProductButton = styled.button`
 `;
 
 const Product = () => {
+    const location = useLocation()
+    const productId = location.pathname.split("/")[2]
+    const product = useSelector((state) => state.product.products.find((product) => product._id === productId))
+    //inside the products array we tries to find the id each product and matches with the productId
     return (
         <ProductContainer>
             <ProductTitleContainer>
@@ -156,25 +161,21 @@ const Product = () => {
                 </ProductTopLeft>
                 <ProductTopRight>
                     <ProductInfoTop>
-                        <ProductInfoImg src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1660803972361" />
-                        <ProductName>Apple Airpods</ProductName>
+                        <ProductInfoImg src={product.img} />
+                        <ProductName>{product.title}</ProductName>
                     </ProductInfoTop>
                     <ProductInfoBottom>
                         <ProductInfoItem>
                             <ProductInfoKey>id:</ProductInfoKey>
-                            <ProductInfoValue>123</ProductInfoValue>
+                            <ProductInfoValue>{product._id}</ProductInfoValue>
                         </ProductInfoItem>
                         <ProductInfoItem>
                             <ProductInfoKey>sales:</ProductInfoKey>
                             <ProductInfoValue>5123</ProductInfoValue>
                         </ProductInfoItem>
                         <ProductInfoItem>
-                            <ProductInfoKey>active:</ProductInfoKey>
-                            <ProductInfoValue>yes</ProductInfoValue>
-                        </ProductInfoItem>
-                        <ProductInfoItem>
                             <ProductInfoKey>In stock:</ProductInfoKey>
-                            <ProductInfoValue>no</ProductInfoValue>
+                            <ProductInfoValue>{product.inStock}</ProductInfoValue>
                         </ProductInfoItem>
                     </ProductInfoBottom>
                 </ProductTopRight>
@@ -183,25 +184,24 @@ const Product = () => {
                 <ProductForm>
                     <ProductFormLeft>
                         <ProductFormLeftLabel>Product Name</ProductFormLeftLabel>
-                        <ProductFormLeftInput placeholder="Apple Airpods" type="text"/>
+                        <ProductFormLeftInput placeholder={product.title} type="text" />
+                        <ProductFormLeftLabel>Product Desc</ProductFormLeftLabel>
+                        <ProductFormLeftInput placeholder={product.desc} type="text" />
+                        <ProductFormLeftLabel>Product Price</ProductFormLeftLabel>
+                        <ProductFormLeftInput placeholder={product.price} type="text" />
                         <ProductFormLeftLabel>In Stock</ProductFormLeftLabel>
                         <ProductFormLeftSelect name="inStock" id="inStock">
-                            <ProductFormLeftOption value="yes">Yes</ProductFormLeftOption>
-                            <ProductFormLeftOption value="no">No</ProductFormLeftOption>
-                        </ProductFormLeftSelect>
-                        <ProductFormLeftLabel>Active</ProductFormLeftLabel>
-                        <ProductFormLeftSelect name="active" id="active">
-                            <ProductFormLeftOption value="yes">Yes</ProductFormLeftOption>
-                            <ProductFormLeftOption value="no">No</ProductFormLeftOption>
+                            <ProductFormLeftOption value="true">Yes</ProductFormLeftOption>
+                            <ProductFormLeftOption value="false">No</ProductFormLeftOption>
                         </ProductFormLeftSelect>
                     </ProductFormLeft>
                     <ProductFormRight>
                         <ProductUpload>
-                            <ProductUploadImage src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1660803972361"/>
+                            <ProductUploadImage src={product.img} />
                             <label for="file">
-                                <Publish/>
+                                <Publish />
                             </label>
-                            <input type="file" id="file" style={{display: "none"}}/>
+                            <input type="file" id="file" style={{ display: "none" }} />
                         </ProductUpload>
                         <ProductButton>Update</ProductButton>
                     </ProductFormRight>

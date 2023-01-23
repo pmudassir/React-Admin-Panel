@@ -51,7 +51,7 @@ const WidgetLarge = () => {
     useEffect(() => {
         const getOrders = async () => {
             try {
-                const res = await userRequest.get("users/?new=true")
+                const res = await userRequest.get("orders")
                 setOrders(res.data)
             } catch (error) { }
         }
@@ -73,7 +73,7 @@ const WidgetLarge = () => {
                     <WidgetLargeTh>Status</WidgetLargeTh>
                 </WidgetLargeTr>
                 {orders && orders.map((order) => (
-                    <WidgetLargeTr>
+                    <WidgetLargeTr key={order._id}>
                         <WidgetLargeTd>
                             <WidgetLargeName>{order.userId}</WidgetLargeName>
                         </WidgetLargeTd>
