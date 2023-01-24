@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Chart from "../components/Chart";
 import { productData } from "../dummyData";
 import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { userRequest } from "../requestMethods";
 
 const ProductContainer = styled.div`
     flex: 4;
@@ -145,8 +147,45 @@ const ProductButton = styled.button`
 const Product = () => {
     const location = useLocation()
     const productId = location.pathname.split("/")[2]
+    const [productStats, setProductStats] = useState([])
     const product = useSelector((state) => state.product.products.find((product) => product._id === productId))
     //inside the products array we tries to find the id each product and matches with the productId
+
+    const MONTHS = useMemo(
+        () => [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec'
+        ],[]
+      )
+
+      useEffect(() => {
+        const getStats = async () => {
+            try {
+                const res = await userRequest.get("orders/income?pid="+ productId)
+                const list = res.data.sort((a,b) => {
+                    return a._id - b._id
+                })
+                list && list.map((item) => 
+                setProductStats((prev) => [
+                    ...prev,
+                    { name: MONTHS[item._id - 1], Sales: item.total }
+                ])
+                )
+            } catch (error) {}
+        }
+        getStats()
+      }, [MONTHS, productId])
+
     return (
         <ProductContainer>
             <ProductTitleContainer>
@@ -157,7 +196,7 @@ const Product = () => {
             </ProductTitleContainer>
             <ProductTop>
                 <ProductTopLeft>
-                    <Chart data={productData} title="Sales Performance" dataKey="Sales" />
+                    <Chart data={productStats} title="Sales Performance" dataKey="Sales" />
                 </ProductTopLeft>
                 <ProductTopRight>
                     <ProductInfoTop>
@@ -193,7 +232,7 @@ const Product = () => {
                         <ProductFormLeftSelect name="inStock" id="inStock">
                             <ProductFormLeftOption value="true">Yes</ProductFormLeftOption>
                             <ProductFormLeftOption value="false">No</ProductFormLeftOption>
-                        </ProductFormLeftSelect>
+                        </ProductFormLeftSelect> 
                     </ProductFormLeft>
                     <ProductFormRight>
                         <ProductUpload>

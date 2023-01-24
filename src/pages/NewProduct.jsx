@@ -47,33 +47,41 @@ const AddProductButton = styled.button`
 `;
 
 const AddProduct = () => {
-  return (
-    <AddProductContainer>
-        <AddProductTitle>Add Product</AddProductTitle>
+    return (
+        <AddProductContainer>
+            <AddProductTitle>Add Product</AddProductTitle>
             <AddProductForm>
                 <AddProductItem>
                     <AddProductLabel>Image</AddProductLabel>
                     <AddProductInput type="file" id="file" />
                 </AddProductItem>
                 <AddProductItem>
-                    <AddProductLabel>Name</AddProductLabel>
+                    <AddProductLabel>Title</AddProductLabel>
                     <AddProductInput placeholder="Apple Airpods" input="text" />
                 </AddProductItem>
                 <AddProductItem>
-                    <AddProductLabel>Stock</AddProductLabel>
-                    <AddProductInput placeholder="123" input="text" />
+                    <AddProductLabel>Description</AddProductLabel>
+                    <AddProductInput placeholder="description" input="text" />
                 </AddProductItem>
                 <AddProductItem>
-                    <AddProductLabel>Active</AddProductLabel>
-                    <AddProductSelect name="active" id="active">
-                        <AddProductOption value="yes">Yes</AddProductOption>
-                        <AddProductOption value="no">No</AddProductOption>
+                    <AddProductLabel>Price</AddProductLabel>
+                    <AddProductInput placeholder="100" input="text" />
+                </AddProductItem>
+                <AddProductItem>
+                    <AddProductLabel>Category</AddProductLabel>
+                    <AddProductInput placeholder="jeans, skirt" input="text" />
+                </AddProductItem>
+                <AddProductItem>
+                    <AddProductLabel>Stock</AddProductLabel>
+                    <AddProductSelect>
+                        <AddProductOption value="true">Yes</AddProductOption>
+                        <AddProductOption value="false">No</AddProductOption>
                     </AddProductSelect>
                 </AddProductItem>
             </AddProductForm>
             <AddProductButton>Create</AddProductButton>
-    </AddProductContainer>
-  )
+        </AddProductContainer>
+    )
 }
 
 export default AddProduct
